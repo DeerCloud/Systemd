@@ -1,0 +1,14 @@
+# /lib/systemd/system/deercloud-shadowsocks@.service
+[Unit]
+Description=Deer.Cloud shadowsocks Server Service for %I
+After=network.target
+
+[Service]
+Type=simple
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+ExecStart=/usr/bin/ss-server -c /opt/deercloud/shadowsocks/%i.json
+Restart=on-failure
+RestartPreventExitStatus=255
+
+[Install]
+WantedBy=multi-user.target
